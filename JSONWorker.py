@@ -23,7 +23,8 @@ class JSONWorker:
     @staticmethod
     def json_reader(filename):
         try:
-            with open(filename, "r", encoding="utf-8") as fp:
+            json_file = f"{filename}.json"
+            with open(json_file, "r", encoding="utf-8") as fp:
                 data = json.load(fp)
             return data
         except FileNotFoundError:
