@@ -3,8 +3,8 @@ import json
 
 class JSONWorker:
     def __init__(self, json_data):
-        if json_data is list and len(json_data) == 3:
-            if json_data[0] is dict and json_data[1] is dict and json_data[2] is dict:
+        if type(json_data) is list and len(json_data) == 3:
+            if type(json_data[0]) is dict and type(json_data[1]) is dict and type(json_data[2]) is dict:
                 self.__json_data = json_data
             else:
                 print("Некорректный тип данных!")
@@ -22,6 +22,11 @@ class JSONWorker:
 
     @staticmethod
     def json_reader(filename):
-        with open(filename, "r", encoding="utf-8") as fp:
-            data = json.load(fp)
-        return data
+        try:
+            with open(filename, "r", encoding="utf-8") as fp:
+                data = json.load(fp)
+            return data
+        except FileNotFoundError:
+            return "Такого файла нет!"
+
+
