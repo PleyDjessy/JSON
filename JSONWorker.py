@@ -14,7 +14,10 @@ class JSONWorker:
             raise ValueError
 
     def create_json_file(self, filename):
-        json_file = f"{filename}.json"
+        if filename == f"{filename[:-5]}.json":
+            json_file = filename
+        else:
+            json_file = f"{filename}.json"
         with open(json_file, "w", encoding="utf-8") as file:
             data = json.dumps(self.__json_data, ensure_ascii=False, indent=2)
             file.write(data)
@@ -23,7 +26,10 @@ class JSONWorker:
     @staticmethod
     def json_reader(filename):
         try:
-            json_file = f"{filename}.json"
+            if filename == f"{filename[:-5]}.json":
+                json_file = filename
+            else:
+                json_file = f"{filename}.json"
             with open(json_file, "r", encoding="utf-8") as fp:
                 data = json.load(fp)
             return data
